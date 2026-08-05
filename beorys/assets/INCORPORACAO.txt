@@ -1,0 +1,81 @@
+RUNBOOK — INCORPORACAO DO GATE DOCUMENTAL A METODOLOGIA BEORYS
+Versao 1.0 | ADR-059 | 13o gate
+
+PRE-REQUISITOS
+  - Repositorio governado local, branch limpa
+  - Python 3.8+ disponivel no PATH
+  - Numeracao do ADR conferida contra docs/adr/
+
+PASSO 1 - POSICIONAR ARQUIVOS
+  Copiar para a raiz do repositorio:
+      BEORYS_GATES.md
+  Copiar para scripts/:
+      verificar_gate_documental.py
+  Copiar para docs/adr/:
+      ADR-059-gate-documental.md
+
+PASSO 2 - CONFERIR A NUMERACAO DO ADR
+      dir docs\adr
+  Se ja existir ADR-059, renomear o arquivo e o titulo interno para o proximo
+  numero livre e atualizar a referencia no cabecalho de BEORYS_GATES.md.
+
+PASSO 3 - AJUSTAR A POLITICA AO REPOSITORIO
+  Abrir BEORYS_GATES.md e conferir, no bloco JSON:
+      - nomes dos documentos vivos batem com os deste repositorio
+      - padroes de caminho batem com a arvore real (src/, server/, client/...)
+      - sempre_exigidos reflete a convencao local
+  Repositorios que usam CURRENT_STATE.md no lugar de ONDE_PARAMOS.md devem
+  trocar o nome em sempre_exigidos.
+
+PASSO 4 - TESTE A SECO, SEM COMMIT
+      python scripts\verificar_gate_documental.py --staged
+  Esperado nesta etapa: RC=1 apontando documentos ausentes.
+  Se retornar RC=3, a politica nao foi lida. Conferir o marcador
+  <!-- BEORYS-GATE-POLICY --> e a validade do bloco JSON.
+
+PASSO 5 - VALIDAR OS QUATRO CENARIOS
+      RC=0  alteracao com todos os documentos exigidos tocados
+      RC=1  alteracao de codigo sem REQUIREMENTS_TRACEABILITY.md
+      RC=2  alteracao de arquivo Status: LOCKED sem ADR na entrega
+      RC=3  BEORYS_GATES.md ausente ou JSON invalido
+  Registrar as quatro saidas em EVIDENCE_REGISTER.md com SHA-256 do script.
+
+PASSO 6 - REGISTRAR NO HASH REGISTRY
+      python scripts\verificar_cobertura_registry.py
+  Adicionar ao registry:
+      BEORYS_GATES.md
+      scripts/verificar_gate_documental.py
+      docs/adr/ADR-059-gate-documental.md
+  Reexecutar ate cobertura 100%.
+
+PASSO 7 - LIGAR NA CI
+  Adicionar ao workflow de PR, apos os gates existentes:
+      python scripts/verificar_gate_documental.py --base origin/main
+  A etapa deve falhar o job em RC diferente de 0.
+
+PASSO 8 - ATUALIZAR OS DOCUMENTOS VIVOS
+      AGENTS.md                   incluir o gate no contrato obrigatorio
+      MANUAL_DO_DESENVOLVEDOR.md  comando, flags e leitura dos RC
+      README.md                   mencionar o 13o gate
+      PENDENCIAS_VIVAS.md         abrir pendencia de calibragem da politica
+      WORK_LOG.md                 registrar a entrega
+      ONDE_PARAMOS.md             proximo passo apos a calibragem
+      EVIDENCE_REGISTER.md        as quatro saidas do PASSO 5
+
+PASSO 9 - REVISAO DE COERENCIA ANTES DO FECHAMENTO
+      ( ) Contagem de gates igual em README, AGENTS e MANUAL (13, nao 12)
+      ( ) Nenhum documento ainda descreve o gate como planejado
+      ( ) Datas conferem com o dia corrente
+      ( ) ADR referenciado com o mesmo numero em todos os arquivos
+
+PASSO 10 - COMMIT
+      git add BEORYS_GATES.md scripts/verificar_gate_documental.py docs/adr/
+      git add AGENTS.md README.md MANUAL_DO_DESENVOLVEDOR.md
+      git add PENDENCIAS_VIVAS.md WORK_LOG.md ONDE_PARAMOS.md EVIDENCE_REGISTER.md
+      git commit -m "feat(governanca): gate documental como 13o gate (ADR-059)"
+
+  Nao executar push antes de confirmar RC=0 no PASSO 4 refeito.
+
+PENDENCIA A ABRIR
+  TEC-XXX  Calibrar padroes da politica apos 5 entregas: identificar tipos que
+           nunca dispararam e decidir entre corrigir o padrao ou remove-lo.

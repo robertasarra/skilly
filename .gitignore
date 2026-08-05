@@ -1,0 +1,11 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Zips gerados para upload — sao artefato, nao fonte.
+# Gere na hora: zip -r <skill>.zip <skill>
+*.zip
+
+# Sistema
+.DS_Store
+Thumbs.db
