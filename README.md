@@ -59,6 +59,17 @@ zip -r beorys.zip beorys
 claude.ai → Configurações → Habilidades → `+` → Criar habilidade. Para atualizar uma que
 já existe, use ⋮ → **Substituir** na skill, não crie outra.
 
+## Verificação automática
+
+Todo PR roda `scripts/validar_skills.py`, que confere em cada skill o que o claude.ai
+só diria no momento do upload: `SKILL.md` presente, frontmatter fechado, `name` em
+minúsculas sem palavra reservada e batendo com o nome da pasta, `description` presente e
+dentro de 1024 caracteres. Skill reprovada aqui seria recusada lá.
+
+O mesmo workflow executa qualquer `testar_*.py` que uma skill traga. A `beorys` traz os
+7 casos da detecção do marcador de travamento — sem isso, uma regressão nela só
+apareceria no projeto de quem instalasse.
+
 ## Antes de subir uma versão
 
 Confira que o que está no `.zip` é o que está aqui. É o passo que faltou em 04/08/2026:
