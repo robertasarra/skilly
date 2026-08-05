@@ -1,0 +1,25 @@
+name: Gate documental BEORYS
+
+on:
+  pull_request:
+
+jobs:
+  gate-documental:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.x"
+
+      # Antes do gate: o gate confia em esta_locked() para decidir o RC=2.
+      # Se a deteccao do marcador quebrar, o gate aprova entrega que deveria
+      # bloquear — falha silenciosa. Ver ADR-003.
+      - name: Testar a deteccao do marcador de travamento
+        run: python scripts/testar_gate_locked.py
+
+      - name: Verificar documentos vivos exigidos
+        run: python scripts/verificar_gate_documental.py --base origin/${{ github.base_ref }}
