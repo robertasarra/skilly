@@ -1,7 +1,8 @@
 # skilly
 
-Skills do Claude, versionadas. Este repositório é a **fonte única** — o lugar de onde
-saem todas as cópias instaladas.
+Skills portáteis e versionadas para agentes de IA. Este repositório é a **fonte única** — o lugar de onde saem as cópias/adapters instalados em projetos, Claude, ChatGPT/Work ou outros runtimes compatíveis.
+
+As integrações de cada plataforma podem variar, mas a fonte metodológica deve permanecer aqui.
 
 ## Por que este repositório existe
 
@@ -76,3 +77,14 @@ interface mostra — se não mudou, o upload não pegou.
 | Skill | O que faz |
 |---|---|
 | [`beorys`](beorys/) | Sistema de continuidade e governança BEORYS™: monta a estrutura de documentos vivos e o gate documental em projetos novos |
+| [`adversarial-project-intelligence`](adversarial-project-intelligence/) | Meta-skill portátil para revisão adversarial, disciplina de evidência, separação de autoridade/estado, contradiction checks, execução responsável, persistência e aprendizagem por regressão |
+
+
+## Regra de upstream
+
+Para skills compartilhadas entre projetos, este repositório é o upstream canônico. Projetos consumidores devem manter apenas:
+- adapter específico do projeto;
+- referência de versão/commit do upstream;
+- fallback local versionado quando necessário para operação offline ou limitação de acesso.
+
+Mudanças universais devem voltar primeiro para este upstream; regras específicas permanecem no adapter do projeto.
