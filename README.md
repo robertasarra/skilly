@@ -88,3 +88,7 @@ Para skills compartilhadas entre projetos, este repositório é o upstream canô
 - fallback local versionado quando necessário para operação offline ou limitação de acesso.
 
 Mudanças universais devem voltar primeiro para este upstream; regras específicas permanecem no adapter do projeto.
+
+## ChatGPT / Work
+
+A skill `adversarial-project-intelligence` está preparada para distribuição em ChatGPT/Work. Veja [`CHATGPT_WORK_DISTRIBUTION.md`](adversarial-project-intelligence/CHATGPT_WORK_DISTRIBUTION.md). A instalação nativa continua sendo uma ação explícita da conta/workspace; este repositório permanece o upstream canônico.
