@@ -79,6 +79,12 @@ interface mostra — se não mudou, o upload não pegou.
 | [`beorys`](beorys/) | Sistema de continuidade e governança BEORYS™: monta a estrutura de documentos vivos e o gate documental em projetos novos |
 | [`adversarial-project-intelligence`](adversarial-project-intelligence/) | Meta-skill portátil para revisão adversarial, disciplina de evidência, separação de autoridade/estado, contradiction checks, execução responsável, persistência e aprendizagem por regressão |
 
+| [`catalogo/`](catalogo/) | 80 skills de terceiros (lista "50 skills do Claude"): oficiais da Anthropic que faltavam na conta + comunidade. Origem e commit de cada uma em [`catalogo/MANIFESTO.md`](catalogo/MANIFESTO.md) |
+
+> As skills de `catalogo/` são cópias fiéis de terceiros, não autoria própria. Não edite
+> o conteúdo delas aqui: atualize a partir da origem e registre o novo commit no manifesto.
+> A cópia ativa nas sessões fica em `segundo-cerebro/.claude/skills/`.
+
 
 ## Regra de upstream
 
