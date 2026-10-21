@@ -1,0 +1,38 @@
+name: Validar skills
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  validar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.x"
+
+      # Os limites do claude.ai (name, description, frontmatter) so aparecem
+      # no momento do upload, com o navegador aberto. Aqui eles aparecem no PR.
+      - name: Validar o frontmatter de cada skill
+        run: python scripts/validar_skills.py
+
+      # Cada skill que traga testes proprios roda aqui. A skill beorys tem os
+      # 7 casos da deteccao do marcador de travamento (ADR-003); sem esta
+      # etapa, uma regressao nela so apareceria no projeto de quem instalou.
+      - name: Rodar os testes das skills
+        run: |
+          set -e
+          encontrou=0
+          for t in $(find . -name "testar_*.py" -not -path "./.git/*" | sort); do
+            echo "::group::$t"
+            (cd "$(dirname "$t")" && python "$(basename "$t")")
+            echo "::endgroup::"
+            encontrou=1
+          done
+          if [ "$encontrou" -eq 0 ]; then
+            echo "Nenhum teste de skill encontrado."
+          fi
