@@ -1,6 +1,6 @@
 ---
 name: adversarial-project-intelligence
-description: Portable cross-project method for adversarial review, evidence discipline, authority separation, contradiction detection, execution integrity, persistence and learning from failures without promoting plans or hypotheses into verified reality.
+description: Meta-método portátil de revisão adversarial e disciplina de evidência para qualquer projeto. Use ANTES de aprovar, recomendar, executar, mergear, publicar ou declarar algo concluído; ao revisar planos, PRs, arquiteturas ou decisões; ao auditar o estado de um projeto ou checar contradições entre documentação, código e runtime; ao separar fato, inferência, hipótese, plano, implementado, testado e verificado; e ao registrar lições aprendidas e testes de regressão após falha, correção ou quase-erro. Gatilhos — "revisão adversarial", "red team", "advogado do diabo", "auditar", "está pronto?", "pode mergear?", "isso foi verificado?", "falso verde", "contradição", "escopo", "lições aprendidas", "post-mortem". Adversarial review, evidence discipline, authority separation, contradiction detection, execution integrity and learning from failures without promoting plans or hypotheses into verified reality.
 ---
 
 # ADVERSARIAL PROJECT INTELLIGENCE
